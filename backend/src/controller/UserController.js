@@ -1,4 +1,6 @@
+import bcrypt from 'bcrypt';
 import User from '../models/User.js';
+
 class UserController {
     async index(req, res) {
         const users = await User.find({});
@@ -15,7 +17,10 @@ class UserController {
         if(req.file){
             image = req.file.filename;
         }
-        const user = await User.create({...req.body, image});
+        let password = req.body.password;
+        const salt = await bcrypt.genSalt(10);
+        password = await bcrypt.hash(password, salt);
+        const user = await User.create({...req.body,password, image});
         res.status(201).json(user);
     }
 
