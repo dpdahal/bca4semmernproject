@@ -4,14 +4,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import HeaderComponent from '../../layouts/HeaderComponent';
 import FooterComponent from '../../layouts/FooterComponent';
+import API from '../../API';
 
 const registerSchema = yup.object().shape({
     name: yup.string().required(),
     email: yup.string().email().required(),
     password: yup.string().required(),
     password_confirm: yup.string().required().oneOf([yup.ref('password')], 'Password confirm must be same as password'),
-    gender: yup.string().required(),
-    role: yup.string().required(),
+    gender: yup.string().required()
 });
 
 export default function RegisterComponent() {
@@ -20,7 +20,11 @@ export default function RegisterComponent() {
     });
 
     const registerRecord =(data)=>{
-        console.log(data);
+        API.post('users',data).then(response=>{
+            console.log(response);
+        }).catch(error=>{
+            console.log(error);
+        });
     }
     return (
         <div className='container'>
@@ -85,20 +89,7 @@ export default function RegisterComponent() {
                     </select>
 
                 </div>
-                <div className="form-group mb-2">
-                    <label> Gender:
-                        <a className='text-danger'>
-                            {errors.role?.message && <span>{errors.role?.message}</span>}
-                        </a>
-                    </label>
-                    <select name='role'  {...register("role")} className="form-control">
-                        <option value=''>Select Role </option>
-                        <option value="admin">Admin</option>
-                        <option value="user">User</option>
-                    </select>
-
-                </div>
-
+               
                 <div className="form-group mb-2">
                     <label htmlFor="image">Image</label>
                     <input type="file" name="image" {...register("image")} className="form-control" />
