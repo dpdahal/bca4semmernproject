@@ -11,6 +11,7 @@ import DashbordComponent from './components/admin/DashbordComponent'
 import LoginComponent from './components/auth/LoginComponent'
 import RegisterComponent from './components/auth/RegisterComponent'
 import UsersComponent from './components/admin/UsersComponent'
+import CategoryComponent from './components/admin/CategoryComponent'
 export default function RouterComponent() {
   return (
     <div>
@@ -25,6 +26,7 @@ export default function RouterComponent() {
         <Route path="/admin" element={<AdminRouteMiddelware />}>
           <Route path="/admin" element={<DashbordComponent />} />
           <Route path="users" element={<UsersComponent/>} />
+          <Route path="category" element={<CategoryComponent/>} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
