@@ -12,6 +12,7 @@ import LoginComponent from './components/auth/LoginComponent'
 import RegisterComponent from './components/auth/RegisterComponent'
 import UsersComponent from './components/admin/UsersComponent'
 import CategoryComponent from './components/admin/CategoryComponent'
+import AddNewsComponent from './components/admin/AddNewsComponent'
 export default function RouterComponent() {
   return (
     <div>
@@ -27,6 +28,7 @@ export default function RouterComponent() {
           <Route path="/admin" element={<DashbordComponent />} />
           <Route path="users" element={<UsersComponent/>} />
           <Route path="category" element={<CategoryComponent/>} />
+          <Route path="addnews" element={<AddNewsComponent/>} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

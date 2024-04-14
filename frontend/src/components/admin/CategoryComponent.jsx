@@ -9,18 +9,22 @@ export default function CategoryComponent() {
     let data={name:name};
     API.post('/category',data).then(res => {
       console.log(res.data);
+      getCategory();
+      setName('');
     }).catch(err => {
       console.log(err);
     })
   }
-
-  useEffect(() => {
+  const getCategory=()=>{
     API.get('/category').then(res => {
       setCategory(res.data);
     }).catch(err => {
       console.log(err);
     })
-  },[]);
+  }
+  useEffect(() => {
+    getCategory();
+      },[]);
   return (
     <div>
       <h1>Category</h1>
